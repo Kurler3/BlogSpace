@@ -17,3 +17,9 @@ export interface Post {
         slug: String;
     }[]
 }
+
+
+export interface Category {
+    name: String;
+    slug: String;
+}
