@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import { Post } from '../common/types';
 
 // COMPONENTS
 import { PostCard, PostWidget, Categories } from '../components';
@@ -11,15 +12,7 @@ import { getPosts } from '../services';
 
 interface Props {
   posts: {
-    node: {
-      title: String;
-    excerpt: String;
-    author: {};
-    createdAt: String;
-    slug: String;
-    featuredImage: {url:String};
-    categories:[]
-  }
+    node: Post
   }[]
 }
 
