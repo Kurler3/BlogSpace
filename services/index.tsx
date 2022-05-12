@@ -52,6 +52,11 @@ export const getPosts = async () => {
 
 }
 
+// GET POST DETAILS
+export const getPostDetails = async () => {
+    
+}
+
 // GET RECENT POSTS
 export const getRecentPosts = async () => {
     const query = gql`
@@ -118,4 +123,26 @@ export const getRelatedPosts = async (categories: Category[], slug: String) => {
         
     }
 
+}
+
+// GET CATEGORIES!
+export const getCategories = async () => {
+    const query = gql`
+        query GetCategories {
+            categories {
+                name
+                slug
+            }
+        }
+    `;
+
+
+    try {
+        let result = await request(graphqlAPI, query);
+        
+        return result.categories;
+    } catch (error) {
+        console.log("Error Fetching categories: ", error);
+                
+    }
 }

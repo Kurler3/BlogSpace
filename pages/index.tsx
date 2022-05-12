@@ -48,6 +48,9 @@ const Home: NextPage<Props> = ({
                   slug={null}
                 />
           </div>
+          <div className="lg:sticky relative top-8">
+                <Categories />
+          </div>
         </div>
       </div>
 
