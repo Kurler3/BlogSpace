@@ -1,6 +1,10 @@
 import React, {memo} from 'react'
 
-const Comments = () => {
+interface Props {
+  slug: String;
+}
+
+const Comments:React.FC<Props> = ({slug}) => {
   return (
     <div>Comments</div>
   )

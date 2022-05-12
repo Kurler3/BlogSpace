@@ -7,7 +7,7 @@ import { getRecentPosts, getRelatedPosts } from '../services';
 
 // PROPS INTERFACE
 interface Props {
-  categories: Category[] | null;
+  categories: String[] | null;
   slug: String | null;
 }
 

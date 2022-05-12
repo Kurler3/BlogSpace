@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export interface Post {
     title: String;
     excerpt: String;
@@ -15,11 +17,30 @@ export interface Post {
     categories: {
         name: String;
         slug: String;
-    }[]
+    }[];
+    content: {
+        raw: String;
+    };
 }
 
+export interface Author {
+    name: String;
+    bio: String;
+    id: number;
+    photo: {
+        url: String;
+    };
+}
 
 export interface Category {
     name: String;
     slug: String;
+}
+
+export type NextGetStaticPropsCtx = {
+	params?: {
+		slug: string
+	}
+	preview?: boolean
+	previewDate?: any
 }

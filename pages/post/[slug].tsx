@@ -1,25 +1,33 @@
 import {memo} from 'react';
 import {getPosts, getPostDetails} from '../../services';
 import {PostDetail, Categories, PostWidget, Author, CommentsForm, Comments} from '../../components';
+import { NextGetStaticPropsCtx, Post } from '../../common/types';
+import { NextPage } from 'next';
+
+interface Props {
+    post: Post;
+}
 
 
-const PostDetails = () => {
+const PostDetails:NextPage<Props> = ({post}) => {
+    console.log("Post:" , post);
+    
   return (
     <div className="container mx-auto px-10 mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* LEFT SIDE */}
             <div className="col-span-1 lg:col-span-8">
-                <PostDetail />
-                <Author />
-                <CommentsForm />
-                <Comments />
+                <PostDetail post={post}/>
+                <Author author={post.author}/>
+                <CommentsForm slug={post.slug} />
+                <Comments  slug={post.slug}/>
             </div>
             {/* RIGHT SIDE */}
             <div className="col-span-1 lg:col-span-4">
                 <div className="relative lg:sticky top-8">
                     <PostWidget
-                        categories={null}
-                        slug={null}
+                        categories={post.categories.map((category) => category.slug)}
+                        slug={post.slug}
                     />
                     <Categories />
                 </div>
@@ -28,6 +36,27 @@ const PostDetails = () => {
     </div>
   )
 }
+
+// PARAMS WILL GET THE SLUG (ON THE URL)
+export async function getStaticProps(context: NextGetStaticPropsCtx) {
+    const data = (await getPostDetails(context.params!.slug));
+    
+    return {
+        props: {post : data[0]},
+    };
+}
+
+export async function getStaticPaths() {
+
+    const posts = await getPosts();
+    
+
+    return {
+       paths: posts.map(({node: {slug}}:{node: {slug:String}}) => ({params: {slug}})),
+       fallback: true
+    }
+}
+
 
 export default memo(PostDetails);
 

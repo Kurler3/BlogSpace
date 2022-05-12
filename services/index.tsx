@@ -52,10 +52,6 @@ export const getPosts = async () => {
 
 }
 
-// GET POST DETAILS
-export const getPostDetails = async () => {
-    
-}
 
 // GET RECENT POSTS
 export const getRecentPosts = async () => {
@@ -89,7 +85,7 @@ export const getRecentPosts = async () => {
 
 // GIVEN AN ARRAY OF CATEGORIES AND A SLUG (END POINT OF LINK)
 // RETURN AN ARRAY OF RELATED POSTS
-export const getRelatedPosts = async (categories: Category[], slug: String) => {
+export const getRelatedPosts = async (categories: String[], slug: String) => {
 
     const query = gql`
         query GetRelatedPosts($slug: String!, $categories: [String!]) {
@@ -145,4 +141,54 @@ export const getCategories = async () => {
         console.log("Error Fetching categories: ", error);
                 
     }
+}
+
+
+
+
+export const getPostDetails = async (slug:String) => {
+    console.log("PostDetails: ", slug);
+    
+    const query = gql`
+        query GetPostDetails($slug: String) {
+            posts(where: {slug: $slug}) {
+                    author {
+                        bio
+                        name
+                        id
+                        photo {
+                                url
+                        }
+                    }
+                    createdAt
+                    slug
+                    title
+                    excerpt
+                    featuredImage {
+                        url
+                    }
+                    categories {
+                        name
+                        slug
+                    }
+                    content {
+                        raw
+                    }
+            }
+        }
+    `;
+
+
+    try {
+        
+        const results = await request(graphqlAPI, query, {slug});
+
+        
+        return results.posts;
+
+    } catch (error) {
+        console.log("Error: ", error);
+        
+    }
+
 }

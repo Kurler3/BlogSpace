@@ -1,6 +1,11 @@
 import React, {memo} from 'react'
+import { Author } from '../common/types';
 
-const Author = () => {
+interface Props {
+  author: Author;
+}
+
+const Author:React.FC<Props> = ({author}) => {
   return (
     <div>Author</div>
   )
