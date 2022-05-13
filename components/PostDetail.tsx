@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { Post } from '../common/types';
 
 interface Props {
@@ -8,8 +8,52 @@ interface Props {
 
 const PostDetail: React.FC<Props> = ({ post }) => {
 
-  console.log("PostRaw: ", post.content.raw);
-  
+  const getContentFragment = useCallback((
+    index:number,
+    text: String, 
+    type:String,
+    obj?, 
+  ) => {
+
+    let modifiedText:any = text;
+
+    if(obj) {
+      if(obj.bold) {
+        modifiedText = (<b key={index}>{text}</b>);
+      }
+      
+      if(obj.italic) {
+        modifiedText = (<em key={index}>{text}</em>);
+      }
+
+      if(obj.underline) {
+        modifiedText = (<u key={index}>{text}</u>);
+      }
+    }
+
+    switch (type) {
+      case 'heading-three':
+        return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item:String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
+      case 'paragraph':
+        return <p key={index} className="mb-8">{modifiedText.map((item: String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+      case 'heading-four':
+        return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item:String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+      case 'image':
+        return (
+          <img
+            key={index}
+            alt={obj.title}
+            height={obj.height}
+            width={obj.width}
+            src={obj.src}
+          />
+        );
+      default:
+        return modifiedText;
+    }
+
+  }, []);
+
 
   return (
     <div className='bg-white rounded-lg shadow-lg lg:p-8 pb-12 mb-12'>
@@ -55,7 +99,7 @@ const PostDetail: React.FC<Props> = ({ post }) => {
         {post.content.raw.children.map((typeObj, index) => {
           const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item));
 
-          return getContentFragment(index, children, typeObj, typeObject.type);
+          return getContentFragment(index, children, typeObj, typeObj.type);
         })}
       </div>
     </div>

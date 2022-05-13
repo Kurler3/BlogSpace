@@ -19,7 +19,12 @@ export interface Post {
         slug: String;
     }[];
     content: {
-        raw: String;
+        raw: {
+            children: [{
+                children: [];
+                type: String;
+            }]
+        };
     };
 }
 
