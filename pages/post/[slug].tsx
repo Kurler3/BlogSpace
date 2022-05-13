@@ -10,7 +10,6 @@ interface Props {
 
 
 const PostDetails:NextPage<Props> = ({post}) => {
-    console.log("Post:" , post);
     
   return (
     <div className="container mx-auto px-10 mb-8">

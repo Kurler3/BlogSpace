@@ -147,7 +147,6 @@ export const getCategories = async () => {
 
 
 export const getPostDetails = async (slug:String) => {
-    console.log("PostDetails: ", slug);
     
     const query = gql`
         query GetPostDetails($slug: String) {
