@@ -11,7 +11,7 @@ export interface Post {
             url: string;
         };
     };
-    createdAt: String;
+    createdAt: string;
     slug: string;
     featuredImage: {url:string};
     categories: {
