@@ -2,20 +2,17 @@ import moment from 'moment';
 import React, { memo, useCallback } from 'react';
 import { Post } from '../common/types';
 
-interface Props {
-  post: Post;
-}
 
-const PostDetail: React.FC<Props> = ({ post }) => {
+const PostDetail = ({ post }) => {
 
   const getContentFragment = useCallback((
-    index:number,
-    text: String, 
-    type:String,
-    obj?, 
+    index,
+    text,
+    type,
+    obj, 
   ) => {
 
-    let modifiedText:any = text;
+    let modifiedText = text;
 
     if(obj) {
       if(obj.bold) {
@@ -33,11 +30,11 @@ const PostDetail: React.FC<Props> = ({ post }) => {
 
     switch (type) {
       case 'heading-three':
-        return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item:String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
+        return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
       case 'paragraph':
-        return <p key={index} className="mb-8">{modifiedText.map((item: String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+        return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
       case 'heading-four':
-        return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item:String, i:number) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+        return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
       case 'image':
         return (
           <img
