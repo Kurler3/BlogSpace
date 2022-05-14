@@ -1,45 +1,45 @@
 import { ParsedUrlQuery } from "querystring";
 
 export interface Post {
-    title: String;
-    excerpt: String;
+    title: string;
+    excerpt: string;
     author: {
-        name: String;
-        bio: String;
+        name: string;
+        bio: string;
         id: number;
         photo: {
-            url: String;
+            url: string;
         };
     };
     createdAt: String;
-    slug: String;
-    featuredImage: {url:String};
+    slug: string;
+    featuredImage: {url:string};
     categories: {
-        name: String;
-        slug: String;
+        name: string;
+        slug: string;
     }[];
     content: {
         raw: {
             children: [{
                 children: [];
-                type: String;
+                type: string;
             }]
         };
     };
 }
 
 export interface Author {
-    name: String;
-    bio: String;
+    name: string;
+    bio: string;
     id: number;
     photo: {
-        url: String;
+        url: string;
     };
 }
 
 export interface Category {
-    name: String;
-    slug: String;
+    name: string;
+    slug: string;
 }
 
 export type NextGetStaticPropsCtx = {
@@ -51,8 +51,8 @@ export type NextGetStaticPropsCtx = {
 }
 
 export type Comment = {
-    name: String;
-    comment: String;
-    email: String;
-    createdAt: String;
+    name: string;
+    comment: string;
+    email:  string;
+    createdAt: string;
 }

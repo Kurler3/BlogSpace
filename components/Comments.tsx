@@ -5,7 +5,7 @@ import { getComments } from '../services';
 import { Comment } from '../common/types';
 
 interface Props {
-  slug: String;
+  slug: string;
 }
 
 const Comments:React.FC<Props> = ({slug}) => {
