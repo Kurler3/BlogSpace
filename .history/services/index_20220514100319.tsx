@@ -204,9 +204,6 @@ export const submitComment = async (data: {
 
         let params = {
             method: "POST", // DEFINE THE TYPE OF HTML REQUEST
-            headers: {
-                'Content-type': 'application/json',
-            },
             body: JSON.stringify(data), // STRINGIFY THE COMMENT
         }
 

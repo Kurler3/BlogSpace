@@ -1,9 +1,4 @@
-import React, {memo, useState, useEffect, useRef, LegacyRef, TextareaHTMLAttributes, DetailedHTMLProps, useCallback, createRef, RefObject} from 'react'
-
-import { submitComment } from '../services';
-
-
-const COMMENT_FORM_CREDENTIALS = "comment_form_credentials";
+import React, {memo, useState, useEffect, useRef, LegacyRef, TextareaHTMLAttributes, DetailedHTMLProps, useCallback} from 'react'
 
 interface Props {
   slug: String;
@@ -17,21 +12,16 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
     showSuccessMessage: false,
   });
 
-  const commentElement = createRef();
-  const nameElement = createRef(); 
-  const emailElement = createRef();
-  const storeDataElement = createRef();
+  const commentElement = useRef();
+  const nameElement = useRef<React.LegacyRef<HTMLTextAreaElement>>(); 
+  const emailElement = useRef<React.LegacyRef<HTMLTextAreaElement>>();
+  const storeDataElement = useRef<React.LegacyRef<HTMLTextAreaElement>>();
 
 
   const handleCommentSubmittion = useCallback(() => {
 
-    let comment = commentElement.current ? commentElement.current.value : null;
-    let name = nameElement.current ? nameElement.current.value : null;
-    let email = emailElement.current ? emailElement.current.value : null;
-    let storeData = storeDataElement.current ? storeDataElement.current.checked : null;
-    
     // SET ERROR
-    if(!comment || !name || !email) {
+    if(!commentElement.current!.value || !nameElement.current.value || !emailElement.current.value) {
       setState((prevState) => {
         return {
           ...prevState,
@@ -41,66 +31,26 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
       return;
     }
 
-    // CHECK IF USER WANTS TO ADD EMAIL + NAME TO LOCAL STORAGE
-    if(storeData) {
-      localStorage.setItem(COMMENT_FORM_CREDENTIALS, JSON.stringify({
-        name,
-        email,
-      }));
-    } else {
-    
-      // REMOVE
-      localStorage.removeItem(COMMENT_FORM_CREDENTIALS);
-    } 
-
     // CREATE NEW COMMENT OBJECT
     let commentObj = {
-      name: name,
-      email: email,
-      comment: comment,
-      slug: slug,
-  };
+        name: nameElement.current.value,
+        email: emailElement.current.value,
+        comment: commentElement.current.value,
+        slug: slug,
+    };
+
+
+    // CHECK IF USER WANTS TO ADD EMAIL + NAME TO LOCAL STORAGE
+
 
     // UPLOAD TO GRAPH CMS
-    submitComment(commentObj).then((res) => {
-      console.log(res)
 
-      // SHOW SUCCESS MESSAGE
-      setState((prevState) => {
-        return {
-          ...prevState,
-          showSuccessMessage: true,
-        }
-      });
-
-      // HIDE SUCCESS MESSAGE
-      setTimeout(() => {
-        setState((prevState) => {
-          return {
-            ...prevState,
-            showSuccessMessage: false,
-          }
-        });
-      }, 3000);
-
-    });
-
-  }, []);
-
-
-
-  useEffect(() => {
-
-    let credentials:{name: String|null, email:String|null}|null = window.localStorage.getItem(COMMENT_FORM_CREDENTIALS) ? JSON.parse(window.localStorage.getItem(COMMENT_FORM_CREDENTIALS)) : "";
-
-    nameElement.current.value = credentials!.name;
-    emailElement.current.value = credentials!.email;
 
   }, []);
 
   return (
         <div className='bg-white shadow-lg rounded-lg p-8 pb-12 mb-8'>
-            <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Leave a reply</h3>
+            <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Comments Form</h3>
 
             <div className='grid grid-cols-1 gap-4 mb-4'>
               <textarea ref={commentElement} className="p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700"
@@ -119,7 +69,7 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
               />
               <input 
                 type="email"
-                ref={emailElement}
+                ref={nameElement}
                 placeholder="Email"
                 name="Email"
                 className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700"

@@ -51,7 +51,9 @@ export async function getStaticPaths() {
     
 
     return {
-       paths: posts.map(({node: {slug}}:{node: {slug:String}}) => ({params: {slug}})),
+       paths: posts.map(({node: {slug}}:{node: {slug:String}}) => 
+        ({params: {slug}})
+       ),
        fallback: true
     }
 }

@@ -1,6 +1,6 @@
 // USING GRAPHQL-REQUEST LIBRARY IS ENOUGH FOR SMALL APPS.
 import { gql, request } from "graphql-request";
-import { Category, Comment } from "../common/types";
+import { Category } from "../common/types";
 
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!;
@@ -190,31 +190,4 @@ export const getPostDetails = async (slug:String) => {
         
     }
 
-}
-
-
-// SUBMIT COMMENT FUNCTION
-export const submitComment = async (data: {
-    name: String;
-    email: String;
-    comment: String;
-    slug: String;
-}) => {
-    try {
-
-        let params = {
-            method: "POST", // DEFINE THE TYPE OF HTML REQUEST
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(data), // STRINGIFY THE COMMENT
-        }
-
-        let result = await fetch('/api/comments', params);
-
-        return result;
-    } catch (error) {
-        console.log("Error submitting comment: ", error);
-        
-    }
 }

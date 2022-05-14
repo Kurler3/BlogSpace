@@ -49,9 +49,3 @@ export type NextGetStaticPropsCtx = {
 	preview?: boolean
 	previewDate?: any
 }
-
-export type Comment = {
-    name: String;
-    comment: String;
-    email: String;
-}

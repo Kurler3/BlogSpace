@@ -25,10 +25,10 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
 
   const handleCommentSubmittion = useCallback(() => {
 
-    let comment = commentElement.current ? commentElement.current.value : null;
-    let name = nameElement.current ? nameElement.current.value : null;
-    let email = emailElement.current ? emailElement.current.value : null;
-    let storeData = storeDataElement.current ? storeDataElement.current.checked : null;
+    let comment = commentElement.current.value;
+    let name = nameElement.current.value;
+    let email = emailElement.current.value;
+    let storeData = storeDataElement.current.checked;
     
     // SET ERROR
     if(!comment || !name || !email) {
@@ -91,7 +91,7 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
 
   useEffect(() => {
 
-    let credentials:{name: String|null, email:String|null}|null = window.localStorage.getItem(COMMENT_FORM_CREDENTIALS) ? JSON.parse(window.localStorage.getItem(COMMENT_FORM_CREDENTIALS)) : "";
+    let credentials:{name: String|null, email:String|null}|null = JSON.parse(window.localStorage.getItem(COMMENT_FORM_CREDENTIALS) ?? "");
 
     nameElement.current.value = credentials!.name;
     emailElement.current.value = credentials!.email;

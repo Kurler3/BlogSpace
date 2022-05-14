@@ -91,7 +91,7 @@ const CommentsForm:React.FC<Props> = ({slug}) => {
 
   useEffect(() => {
 
-    let credentials:{name: String|null, email:String|null}|null = window.localStorage.getItem(COMMENT_FORM_CREDENTIALS) ? JSON.parse(window.localStorage.getItem(COMMENT_FORM_CREDENTIALS)) : "";
+    let credentials:{name: String|null, email:String|null}|null = JSON.parse(window.localStorage.getItem(COMMENT_FORM_CREDENTIALS) ?? "");
 
     nameElement.current.value = credentials!.name;
     emailElement.current.value = credentials!.email;
