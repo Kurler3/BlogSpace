@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Link from 'next/Link';
+import Link from 'next/link';
 
 // GRAPHQL FUNCTION
 import { getCategories } from '../services';
