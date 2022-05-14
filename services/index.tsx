@@ -9,7 +9,9 @@ export const getPosts = async () => {
 
     const query = gql`
         query MyQuery {
-            postsConnection {
+            postsConnection(
+                first: 4
+            ) {
                 edges {
                 node {
                     author {
@@ -215,6 +217,68 @@ export const submitComment = async (data: {
         return result;
     } catch (error) {
         console.log("Error submitting comment: ", error);
+        
+    }
+}
+
+
+
+// GET COMMENTS FOR SPECIFIC SLUG
+export const getComments = async (slug: String) => {
+
+    const query = gql`
+        query GetComments($slug: String) {
+            comments(where: {post: {slug: $slug}}) {
+                name
+                comment
+                email
+                createdAt
+            }
+        }
+    `;
+
+
+    try {
+
+        let result = await request(graphqlAPI, query, {slug});
+        
+        return result.comments;
+
+    } catch (error) {
+        console.log("Error in getting comments: ", error);
+        
+    }
+
+}
+
+
+// GET FEATURED POSTS
+export const getFeaturedPosts = async () => {
+    const query = gql`
+        query GetFeaturedPosts {
+            posts(where: {featuredPost: true}) {
+                author {        
+                    name  
+                    photo {
+                        url
+                    }
+                }
+                createdAt
+                slug
+                title
+                featuredImage {
+                    url
+                }
+            }
+        }
+    `;
+
+    try {
+        let results = await request(graphqlAPI, query);
+
+        return results.posts;
+    } catch (error) {
+        console.log("Error fetching featured posts: ", error);
         
     }
 }

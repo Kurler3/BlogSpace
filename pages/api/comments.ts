@@ -16,7 +16,6 @@ export default async function comments(
   res: NextApiResponse<Data>
 ) {
   try {
-    console.log("GraphCMSToken: ",graphcmsToken);
     
     // CONNECT AND AUTHENTICATE TO THE GRAPHQLCLIENT
     const graphQLClient = new GraphQLClient(
@@ -31,7 +30,11 @@ export default async function comments(
     // CREATE THE QUERY
     const query = gql`
       mutation CreateComment($name:String!, $email:String!, $comment:String!, $slug:String!) {
-        createComment(data: {name:$name, email:$email, comment:$comment, post: {connect: {slug:$slug}}})
+        createComment(data: {name:$name, email:$email, comment:$comment, post: {connect: {slug:$slug}}}) {
+          name
+          email
+          comment
+        }
       }
     `;
 

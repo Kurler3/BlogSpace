@@ -5,6 +5,7 @@ import { Post } from '../common/types';
 
 // COMPONENTS
 import { PostCard, PostWidget, Categories } from '../components';
+import FeaturedPosts from '../sections/FeaturedPosts';
 
 // GRAPHQL FUNCTIONS
 import { getPosts } from '../services';
@@ -27,6 +28,9 @@ const Home: NextPage<Props> = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      {/* FEATURED POSTS CAROUSEL */}
+      <FeaturedPosts />
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         {/* POSTS */}
         <div className="lg:col-span-8 col-span-1">
@@ -47,8 +51,7 @@ const Home: NextPage<Props> = ({
                   categories={null}
                   slug={null}
                 />
-          </div>
-          <div className="lg:sticky relative top-8">
+                
                 <Categories />
           </div>
         </div>

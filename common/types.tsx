@@ -54,4 +54,5 @@ export type Comment = {
     name: String;
     comment: String;
     email: String;
+    createdAt: String;
 }

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import type { AppProps } from 'next/app';
 import '../styles/globals.scss';
+import 'react-multi-carousel/lib/styles.css';
 import {Layout} from '../components';
 
 function MyApp({ Component, pageProps }: AppProps) {
