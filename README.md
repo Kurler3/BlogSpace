@@ -1,23 +1,20 @@
-# Next.js + Tailwind CSS Example
+# BlogSpace
+Modern Blog using Next.js, Typescript, TailwindCSS, GraphQL and GraphCMS
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This was my first time using a headless CMS. Also used this project to learn tailwindcss.
 
-## Deploy your own
+The website was deployed with vercel at: https://blog-space-next.vercel.app/
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Here's some screenshots:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+![image](https://user-images.githubusercontent.com/43253459/168443936-7df9e1fe-931f-49a3-b308-ae2dd556bf72.png)
 
-## How to use
+![image](https://user-images.githubusercontent.com/43253459/168443947-fd75303a-2a55-4a0f-83fe-bbeab27f3690.png)
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+Post Details page: 
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
-```
+![image](https://user-images.githubusercontent.com/43253459/168443964-4484c8ec-bb28-4903-9421-a6503a2ae249.png)
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Comment Section:
+
+![image](https://user-images.githubusercontent.com/43253459/168443978-18a97018-d78a-4f7f-a10c-a4076c842084.png)
